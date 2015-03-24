@@ -1,7 +1,3 @@
-# QuadraticEquation
-/** THIS IS APPLET FOR QUADRATIC EQUATION */
-
-package mainApplet;
 import java.applet.Applet;
 import java.awt.event.*;
 import java.awt.*;
@@ -48,10 +44,12 @@ long a_long,b_long,c_long,D_long;
 		show_discriminant.addActionListener(this);
 		this.setSize(700,300);
 	}
+
 private int radical(int num){
 	int radical = 0;
 	while(true){
 		radical++;
+		
 		if(num == radical*radical){
 			break;
 		}
@@ -74,14 +72,17 @@ private String operation(double a,double b,double c){
 	}
     if(D < 0){
     	answer = "Корней нет.";
+    	//exit
     }else if(D == 0){
     	x1 = -b / (2*a);
     	String x1_string = String.valueOf(x1); 
     	if(x1_string.substring(x1_string.indexOf(".")+1).equals("0")){
     		int x1_int = (int) x1;
     		answer = "x = " + x1_int;
+        	//exit
     	}else{
     	answer = "x = " + x1;
+    	//exit
     	}
     }else{
     	if(D_string.indexOf(".")  != -1){
@@ -111,20 +112,22 @@ private String operation(double a,double b,double c){
     				int x2_int = (int) x2;
     				answer = "x1 = " + x1 + ";   x2 = " + x2_int + ";";
     			}
+        		
     	}else{
     	answer = "x1 = " + x1 + "; x2 = " + x2;
     	     }
-    	
+    	//exit 
     		    }
-    	   }
+    		}
     	}
 	return answer;
 }
+
 public void actionPerformed(ActionEvent ev) {
 	if(tf_a.getText().equals("") || tf_b.getText().equals("") || tf_c.getText().equals("")){
 		roots.setText("");
 		discriminant.setForeground(Color.RED);
-		discriminant.setText(" Введите все значения");
+		discriminant.setText(" Enter all values");
 		return;
 	}
 	discriminant.setForeground(Color.BLACK);
@@ -141,7 +144,7 @@ public void actionPerformed(ActionEvent ev) {
 	}catch(NumberFormatException ex){
 		roots.setText("");
 		discriminant.setForeground(Color.RED);
-		discriminant.setText(" Введите правильные значения");
+		discriminant.setText(" Enter the correct values");
 		tf_a.setText("");
 		tf_b.setText("");
 		tf_c.setText("");
@@ -157,11 +160,11 @@ public void actionPerformed(ActionEvent ev) {
     }else discriminant.setText("" + D);
     }
 	if(button == show_roots){
-		if(discriminant.getText().equals(" Введите правильные значения") || 
-		   discriminant.getText().equals(" Введите все значения") ||
+		if(discriminant.getText().equals(" Enter the correct values") || 
+		   discriminant.getText().equals(" Enter all values") ||
 		   discriminant.getText().equals(" (a != 0)")) discriminant.setText("");
-	     String answer = operation(a,b,c);
-	     roots.setText(answer);
-  	}
+		String answer = operation(a,b,c);
+		roots.setText(answer);
+	}
   }
 }
